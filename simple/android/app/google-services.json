@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "350084024699",
+    "project_id": "edgefly-9d420",
+    "storage_bucket": "edgefly-9d420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350084024699:android:b04dd56f7f8627116455de",
+        "android_client_info": {
+          "package_name": "com.example.simple"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350084024699-kagrdqeso9getedfkmqhuffbeav6ditc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.simple",
+            "certificate_hash": "e47f8cff8557934679382b832dfd077c5dc3e935"
+          }
+        },
+        {
+          "client_id": "350084024699-licpqd6n0dvlkk817u4u8e1fkmct1sp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9kGHThaTshCY_-FfzCPOhrSPrp3tNRhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350084024699-licpqd6n0dvlkk817u4u8e1fkmct1sp5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
