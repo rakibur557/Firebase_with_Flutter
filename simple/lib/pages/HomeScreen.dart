@@ -6,7 +6,7 @@ import 'LoginScreen.dart';
 class HomeScreen extends StatefulWidget {
   static const String path = "HomeScreen";
 
-  HomeScreen({Key? key, this.email, this.name, this.photoUrl})
+  HomeScreen({Key? key,  this.email, this.name, this.photoUrl})
       : super(key: key);
 
   final email, name, photoUrl;

@@ -48,7 +48,7 @@ class RegisterLoginAuth {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (ctx) => HomeScreen(),
+                    builder: (ctx) => HomeScreen(email: 'admin', photoUrl: 'www',name: 'rakib',),
                   ),
                 ),
               });
