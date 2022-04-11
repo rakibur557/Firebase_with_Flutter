@@ -13,10 +13,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   googleServiceProvider googleService = googleServiceProvider();
   var obscureText = true; //password visibity controller
-
+  RegisterLoginAuth registerLoginAuth = RegisterLoginAuth();
   @override
   Widget build(BuildContext context) {
-    //EXIT CONTROLLER START HERE
+
+//EXIT CONTROLLER START HERE
     return WillPopScope(
       onWillPop: () async {
         final value = await showDialog<bool>(
@@ -43,17 +44,17 @@ class _LoginScreenState extends State<LoginScreen> {
           return Future.value(false);
         }
       },
-      //SCAFFOLD DESIGN START HERE
+//SCAFFOLD DESIGN START HERE
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
-                //LOGIN SCREEEN IMAGE START HERE
+//LOGIN SCREEEN IMAGE HERE
                 Image.asset('assets/images/login.png'),
                 const SizedBox(
-                  height: 25,
+                  height: 15,
                 ),
                 const Text(
                   'SIGN IN',
@@ -63,10 +64,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
 
-                //EMAIL FIELD START HERE
-                const Padding(
+//EMAIL FIELD START HERE
+                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 35),
                   child: TextField(
+                    controller: registerLoginAuth.email,
                     decoration: InputDecoration(
                       hintText: 'Enter your Email',
                       prefixIcon: Icon(Icons.mail),
@@ -74,10 +76,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
 
-                //PASSWORD FIELD START HERE
+//PASSWORD FIELD START HERE
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
                   child: TextField(
+                    controller: registerLoginAuth.password,
                     obscureText: obscureText,
                     decoration: InputDecoration(
                       hintText: 'Enter your Password',
@@ -92,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ? const Icon(
                                   Icons.visibility_off,
                                   color: Colors.grey,
-
                                 )
                               : const Icon(
                                   Icons.visibility,
@@ -101,11 +103,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-
-                //LOGIN BUTTON START HERE
+//FORGET PASSWORD
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, right: 30),
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        'Forgot password?',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  ]),
+                ),
+//LOGIN BUTTON START HERE
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: 45, bottom: 20, left: 30, right: 30),
+                      top: 30, bottom: 20, left: 30, right: 30),
                   child: Container(
                     height: 40,
                     width: double.infinity,
@@ -113,27 +128,50 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: ElevatedButton.styleFrom(
                         primary: Colors.green,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        if(registerLoginAuth.email != '' && registerLoginAuth.password !=''){
+                          registerLoginAuth.loginUser(context);
+                        }
+                      },
                       child: const Text('LOGIN'),
                     ),
                   ),
                 ),
-                const Text('- Signin with -'),
+                Row(
+
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+//REGISTER SECTION HERE
+                    const Text("Don't you have any account? "),
+                    InkWell(
+                      onTap: (){},
+                      child: const Text("Resigter Now", style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold,
+
+                      ),),
+                    ),
+                  ],
+                ),
                 const SizedBox(
                   height: 15,
                 ),
-                //SIGNIN WITH GOOGLE AND PHONE
+                const Text('- Or Signin with -'),
+                const SizedBox(
+                  height: 15,
+                ),
+//SIGNIN WITH GOOGLE AND PHONE
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // PHONE SECTION
+// PHONE VARIFICATION SECTION
                     IconButton(
                         onPressed: () {},
                         icon: Image.asset(
                           'assets/images/telephone.png',
                         )),
-                    // GOOGLE SECTION
+// GOOGLE AUTHENTICATION SECTION
                     IconButton(
                         onPressed: () async {
                           await googleService.signInWithGoogle();
@@ -151,7 +189,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         icon: Image.asset(
                           'assets/images/google.png',
                         )),
+//FACEBOOK AUTHENTICATION SECTION
+                    IconButton(
+                        onPressed: () {},
+                        // onPressed: () async {
+                        //   //await googleService.signInWithGoogle();
+                        //   setState(() {
+                        //     Navigator.pushReplacement(
+                        //         context,
+                        //         CupertinoPageRoute(
+                        //             builder: (context) => HomeScreen(
+                        //                 email: googleService.email,
+                        //                 name: googleService.name,
+                        //                 photoUrl: googleService.photoUrl)));
+                        //     //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                        //   });
+                        // },
+                        icon: Image.asset(
+                          'assets/images/facebook.png',
+                        )),
                   ],
+                ),
+                SizedBox(height: 15,),
+                Text(
+                  "Terms & Conditions applied",
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),

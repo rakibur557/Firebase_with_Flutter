@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:simple/pages/HomeScreen.dart';
 
 class googleServiceProvider {
   String email = '', name = '', photoUrl = '';
@@ -24,9 +27,33 @@ class googleServiceProvider {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  Future logout() async{
+  Future logout() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().disconnect();
     FirebaseAuth.instance.signOut();
   }
+}
 
+class RegisterLoginAuth {
+  final auth = FirebaseAuth.instance;
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  void loginUser(context) async {
+    try {
+      CircularProgressIndicator();
+      await auth
+          .signInWithEmailAndPassword(
+              email: email.text, password: password.text)
+          .then((value) => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) => HomeScreen(),
+                  ),
+                ),
+              });
+    } catch (e) {
+      print(e);
+    }
+  }
 }
