@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
-//import 'package:simple/pages/HomeScreen.dart';
+import 'package:simple/services/googleServiceProvider.dart';
 import 'HomeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,24 +11,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  ///late GoogleSignInAccount userobj;
-  //GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
-  // Future signInProcess() async{
-  //   final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();
-  //   final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
-  //   AuthCredential credential = GoogleAuthProvider.credential(idToken: googleSignInAuthentication.idToken, accessToken: googleSignInAuthentication.accessToken );
-  //   UserCredential result = await FirebaseAuth.instance.signInWithCredential(credential);
-  //   User? user = result.user;
-  //
-  //   if(user != null){
-  //     print('IF IS WORKING');
-  //     Navigator.push(context, CupertinoPageRoute(builder: (context)=>HomeScreen()));
-  //   }
-  // }
+  googleServiceProvider googleService = googleServiceProvider();
+  var obscureText = true; //password visibity controller
 
   @override
   Widget build(BuildContext context) {
-    // GoogleSignInAccount? user = googleSignIn.currentUser;
+    //EXIT CONTROLLER START HERE
     return WillPopScope(
       onWillPop: () async {
         final value = await showDialog<bool>(
@@ -58,12 +43,14 @@ class _LoginScreenState extends State<LoginScreen> {
           return Future.value(false);
         }
       },
+      //SCAFFOLD DESIGN START HERE
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
+                //LOGIN SCREEEN IMAGE START HERE
                 Image.asset('assets/images/login.png'),
                 const SizedBox(
                   height: 25,
@@ -78,8 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 //EMAIL FIELD START HERE
                 const Padding(
-                  padding:
-                       EdgeInsets.symmetric(horizontal: 30, vertical: 35),
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 35),
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Enter your Email',
@@ -89,14 +75,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 //PASSWORD FIELD START HERE
-                const Padding(
-                  padding:
-                       EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
                   child: TextField(
-                    obscureText: true,
+                    obscureText: obscureText,
                     decoration: InputDecoration(
                       hintText: 'Enter your Password',
-                      prefixIcon: Icon(Icons.key),
+                      prefixIcon: Icon(Icons.lock),
+                      suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              obscureText = !obscureText;
+                            });
+                          },
+                          child: obscureText
+                              ? const Icon(
+                                  Icons.visibility_off,
+                                  color: Colors.grey,
+
+                                )
+                              : const Icon(
+                                  Icons.visibility,
+                                  color: Colors.green,
+                                )),
                     ),
                   ),
                 ),
@@ -135,83 +136,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     // GOOGLE SECTION
                     IconButton(
                         onPressed: () async {
-                          await signInWithGoogle();
+                          await googleService.signInWithGoogle();
                           setState(() {
                             Navigator.pushReplacement(
                                 context,
                                 CupertinoPageRoute(
-                                    builder: (context) => HomeScreen()));
+                                    builder: (context) => HomeScreen(
+                                        email: googleService.email,
+                                        name: googleService.name,
+                                        photoUrl: googleService.photoUrl)));
                             //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
                           });
-                          // await GoogleSignIn().signIn().then((value) {
-                          //   setState(() {
-                          //     //userobj = value!;
-                          //   });
-                          // });
                         },
                         icon: Image.asset(
                           'assets/images/google.png',
                         )),
                   ],
                 ),
-
-/*
-                //GOOGLE BUTTON START HERE
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 15, left: 30, right: 30),
-                  child: Container(
-                    height: 40,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                      ),
-                      onPressed: () {},
-                      child: Text('Sign in with Google'),
-                    ),
-                  ),
-                ),
-
-                //PHONE BUTTON START HERE
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 15, left: 30, right: 30),
-                  child: Container(
-                    height: 40,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                      ),
-                      onPressed: () {},
-                      child: Text('Sign in with Phone'),
-                    ),
-                  ),
-                ),
-*/
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  //----------------
-  Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
