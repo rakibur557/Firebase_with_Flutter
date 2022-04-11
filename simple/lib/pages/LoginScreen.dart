@@ -192,24 +192,12 @@ class _LoginScreenState extends State<LoginScreen> {
 //FACEBOOK AUTHENTICATION SECTION
                     IconButton(
                         onPressed: () {},
-                        // onPressed: () async {
-                        //   //await googleService.signInWithGoogle();
-                        //   setState(() {
-                        //     Navigator.pushReplacement(
-                        //         context,
-                        //         CupertinoPageRoute(
-                        //             builder: (context) => HomeScreen(
-                        //                 email: googleService.email,
-                        //                 name: googleService.name,
-                        //                 photoUrl: googleService.photoUrl)));
-                        //     //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
-                        //   });
-                        // },
                         icon: Image.asset(
                           'assets/images/facebook.png',
                         )),
                   ],
                 ),
+//FOOTER SECTION
                 SizedBox(height: 15,),
                 Text(
                   "Terms & Conditions applied",
