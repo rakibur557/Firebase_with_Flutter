@@ -8,8 +8,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'pages/HomeScreen.dart';
 import 'services/services.dart';
 
-Future<void> main()async
-{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -25,14 +24,14 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         //'/': (ctx) =>HomeScreen(),
-        services.path: (ctx)=>services(),
-        services.path: (ctx)=>HomeScreen(),
+        services.path: (ctx) => services(),
+        services.path: (ctx) => HomeScreen(),
       },
       home: AnimatedSplashScreen(
-          duration: 3000,
-          splash: 'assets/images/splashlogo.png',
-          nextScreen: LoginScreen(),
-          splashTransition: SplashTransition.fadeTransition,
+        duration: 3000,
+        splash: 'assets/images/splashlogo.png',
+        nextScreen: LoginScreen(),
+        splashTransition: SplashTransition.fadeTransition,
       ),
     );
   }
