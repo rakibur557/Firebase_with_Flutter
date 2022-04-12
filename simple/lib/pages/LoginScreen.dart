@@ -176,6 +176,9 @@ class _LoginScreenState extends State<LoginScreen> {
 // GOOGLE AUTHENTICATION SECTION
                     IconButton(
                         onPressed: () async {
+                          showDialog(context: context, builder: (context){
+                            return Center(child: CircularProgressIndicator(),);
+                          });
                           await googleService.signInWithGoogle();
                           setState(() {
                             Navigator.pushReplacement(

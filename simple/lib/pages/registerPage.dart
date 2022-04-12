@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple/services/googleServiceProvider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -10,10 +11,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
 
-  TextEditingController username = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController confirmPassword = TextEditingController();
+  RegisterLoginAuth registerLoginAuth = RegisterLoginAuth();
 
   var obscureText = true; //password visibity controller
   @override
@@ -67,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: EdgeInsets.only(right: 25, left: 25, bottom: 20, top: 30,),
                   child: TextField(
-                   // controller: registerLoginAuth.email,
+                    controller: registerLoginAuth.username,
                     decoration: InputDecoration(
                       hintText: 'Enter your name',
                       prefixIcon: Icon(Icons.person_outline),
@@ -78,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 0),
                   child: TextField(
-                    // controller: registerLoginAuth.email,
+                  controller: registerLoginAuth.regEmail,
                     decoration: InputDecoration(
                       hintText: 'Enter your email',
                       prefixIcon: Icon(Icons.email_outlined),
@@ -89,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   child: TextField(
-                    //controller: registerLoginAuth.password,
+                    controller: registerLoginAuth.regPassword,
                     obscureText: obscureText,
                     decoration: InputDecoration(
                       hintText: 'Enter your Password',
@@ -116,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 0),
                   child: TextField(
-                    //controller: registerLoginAuth.password,
+                    controller: registerLoginAuth.regConfirmPassword,
                     obscureText: obscureText,
                     decoration: InputDecoration(
                       hintText: 'Confirm Password',
@@ -151,7 +149,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
 
-//LOGIN BUTTON START HERE
+//REGISTER BUTTON START HERE
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 30, bottom: 20, left: 30, right: 30),
@@ -163,9 +161,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         primary: Colors.black,
                       ),
                       onPressed: () {
-                        // if(registerLoginAuth.email != '' && registerLoginAuth.password !=''){
-                        //   registerLoginAuth.loginUser(context);
-                        // }
+                        if(registerLoginAuth.regEmail != '' && registerLoginAuth.regPassword !=''){
+                          registerLoginAuth.registerUser(context);
+                        }
                       },
                       child: const Text('REGISTER', style: TextStyle(color: Colors.white)),
                     ),

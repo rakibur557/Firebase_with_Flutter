@@ -5,7 +5,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:simple/pages/HomeScreen.dart';
 
 class googleServiceProvider {
-  String email = '', name = '', photoUrl = '';
+  String email = '',
+      name = '',
+      photoUrl = '';
 
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
@@ -13,7 +15,7 @@ class googleServiceProvider {
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+    await googleUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -38,22 +40,43 @@ class RegisterLoginAuth {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
+  TextEditingController username = TextEditingController();
+  TextEditingController regEmail = TextEditingController();
+  TextEditingController regPassword = TextEditingController();
+  TextEditingController regConfirmPassword = TextEditingController();
+
   void loginUser(context) async {
     try {
-      CircularProgressIndicator();
+      showDialog(context: context, builder: (context) {
+        return Center(child: CircularProgressIndicator(),);
+      });
       await auth
           .signInWithEmailAndPassword(
-              email: email.text, password: password.text)
-          .then((value) => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (ctx) => HomeScreen(email: 'admin', photoUrl: 'www',name: 'rakib',),
-                  ),
-                ),
-              });
+          email: email.text, password: password.text)
+          .then((value) =>
+      {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) =>
+                HomeScreen(email: 'admin', photoUrl: 'www', name: 'rakib',),
+          ),
+        ),
+      });
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future registerUser(context) async {
+    try {
+      await auth.createUserWithEmailAndPassword(
+          email: regEmail.text, password: regPassword.text).then((value){
+            print('User is Registered');
+      });
+
+    } catch (e){
+       SnackBar(content: Text('${e}'),);
     }
   }
 }
