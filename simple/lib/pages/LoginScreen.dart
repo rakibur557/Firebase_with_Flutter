@@ -138,7 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Row(
-
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 //REGISTER SECTION HERE

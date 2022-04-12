@@ -15,6 +15,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+//APPBAR SECTION
       appBar: AppBar(
         leading: GestureDetector(
           child: Icon( Icons.arrow_back_ios, color: Colors.black,  ),
@@ -37,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
 //CREATE ACCOUNT HEADING
                 Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
+                  padding: const EdgeInsets.only(top: 50.0),
                   child: CircleAvatar(child: Icon(Icons.person)),
                 ),
                 Text(
@@ -58,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
 //NAME FIELD HERE
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                  padding: EdgeInsets.only(right: 25, left: 25, bottom: 20, top: 30,),
                   child: TextField(
                    // controller: registerLoginAuth.email,
                     decoration: InputDecoration(
@@ -74,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     // controller: registerLoginAuth.email,
                     decoration: InputDecoration(
                       hintText: 'Enter your email',
-                      prefixIcon: Icon(Icons.person_outline),
+                      prefixIcon: Icon(Icons.email_outlined),
                     ),
                   ),
                 ),
@@ -86,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: obscureText,
                     decoration: InputDecoration(
                       hintText: 'Enter your Password',
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: Icon(Icons.lock_outline),
                       suffixIcon: GestureDetector(
                           onTap: () {
                             setState(() {
@@ -113,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: obscureText,
                     decoration: InputDecoration(
                       hintText: 'Confirm Password',
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: Icon(Icons.lock_outlined),
                       suffixIcon: GestureDetector(
                           onTap: () {
                             setState(() {
@@ -132,7 +133,38 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
+//TERMS AND CONDITIONS
+                Padding(
+                  padding: EdgeInsets.only(left: 25, right: 25, top: 30,bottom: 0,),
+                  child: Text(
+                    "By Signing Up you agreed to our terms, conditions and privacy policy.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      ),
+                    ),
+                  ),
 
+//LOGIN BUTTON START HERE
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 30, bottom: 20, left: 30, right: 30),
+                  child: Container(
+                    height: 40,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                      ),
+                      onPressed: () {
+                        // if(registerLoginAuth.email != '' && registerLoginAuth.password !=''){
+                        //   registerLoginAuth.loginUser(context);
+                        // }
+                      },
+                      child: const Text('REGISTER', style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
