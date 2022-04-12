@@ -143,11 +143,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
 //REGISTER SECTION HERE
                     const Text("Don't you have any account? "),
-                    InkWell(
-                      onTap: (){},
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).pushNamed('/registerRoute');
+                      },
                       child: const Text("Resigter Now", style: TextStyle(
-                        decoration: TextDecoration.underline,
+                        // decoration: TextDecoration.underline,
                         fontWeight: FontWeight.bold,
+                        color: Colors.blue,
 
                       ),),
                     ),

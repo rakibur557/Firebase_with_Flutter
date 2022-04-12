@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:simple/pages/LoginScreen.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'pages/HomeScreen.dart';
+import 'pages/registerPage.dart';
 import 'services/services.dart';
 
 Future<void> main()async
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         //'/': (ctx) =>HomeScreen(),
         services.path: (ctx)=>services(),
         HomeScreen.path: (ctx)=>HomeScreen(),
+        '/registerRoute': (ctx)=> RegisterPage(),
       },
       home: AnimatedSplashScreen(
           duration: 3000,
