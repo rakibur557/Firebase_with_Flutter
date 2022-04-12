@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.only(top: 10, right: 30),
                   child:
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () {},
                       child: Text(
                         'Forgot password?',
