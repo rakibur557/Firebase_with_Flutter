@@ -36,6 +36,7 @@ class googleServiceProvider {
 }
 
 class RegisterLoginAuth {
+  String errorMessage = '';
   final auth = FirebaseAuth.instance;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -47,14 +48,14 @@ class RegisterLoginAuth {
 
   void loginUser(context) async {
     try {
-      showDialog(context: context, builder: (context) {
-        return Center(child: CircularProgressIndicator(),);
-      });
       await auth
           .signInWithEmailAndPassword(
           email: email.text, password: password.text)
           .then((value) =>
       {
+        showDialog(context: context, builder: (context) {
+          return Center(child: CircularProgressIndicator(),);
+        }),
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -63,26 +64,49 @@ class RegisterLoginAuth {
           ),
         ),
       });
-    } catch (e) {
+      errorMessage = '';
+    } on FirebaseAuthException catch (e) {
+      errorMessage = e.message!;
       print(e);
     }
   }
 
   Future registerUser(context) async {
     try {
-      await auth.createUserWithEmailAndPassword(
-          email: regEmail.text, password: regPassword.text).then((value){
-            print('User is Registered');
-      });
+      if (regPassword.text != regConfirmPassword.text) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Confirm Password doesn't match"),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+      else{
+        await auth.createUserWithEmailAndPassword(
+            email: regEmail.text, password: regPassword.text).then((value) {
+          showDialog(context: context, builder: (context) {
+            return Center(child: CircularProgressIndicator(),);
+          });
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (ctx) =>
+                  HomeScreen(
+                    email: regEmail.text,
+                    photoUrl: 'www',
+                    name: username.text,),
+            ),
+          );
+          print('User is Registered');
+          //else
+        } //then
+
+        );
+    }//then
       errorMessage = '';
     } on FirebaseAuthException catch (e){
       errorMessage = e.message!;
-     // SnackBar(content: Text('EROOR'),);
       print(e);
     }
   }
-  String errorMessage = '';
-// final ShowsnackBar = SnackBar(
-//   content: Text('${errorMessage}'),
-// );
 }

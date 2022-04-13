@@ -161,25 +161,27 @@ class _RegisterPageState extends State<RegisterPage> {
                         primary: Colors.black,
                       ),
                       onPressed: () {
-                        if(registerLoginAuth.regEmail != '' && registerLoginAuth.regPassword !=''){
-                          registerLoginAuth.registerUser(context);
+                        if(registerLoginAuth.username !='' && registerLoginAuth.regEmail != '' && registerLoginAuth.regPassword !='' && registerLoginAuth.regConfirmPassword !=''){
+                            registerLoginAuth.registerUser(context);
                         }
+
                         setState(() {
-                          if(registerLoginAuth.errorMessage=='Given String is empty or null'){
+                          if(registerLoginAuth.errorMessage=='Given String is empty or null' ||
+                              registerLoginAuth.errorMessage=='' ||
+                              registerLoginAuth.username==''){
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 //  content: Text('${registerLoginAuth.errorMessage}'),
                                 content: Text('Please provide information for all required fields'),
                                 backgroundColor: Colors.red,
-
                               ),
                             );
                           }
-                          else{
+                          else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                //  content: Text('${registerLoginAuth.errorMessage}'),
                                 content: Text('${registerLoginAuth.errorMessage}'),
+                                backgroundColor: Colors.red,
                               ),
                             );
                           }

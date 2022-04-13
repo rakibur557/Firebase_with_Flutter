@@ -129,8 +129,38 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       onPressed: () {
                         if(registerLoginAuth.email != '' && registerLoginAuth.password !=''){
+
                           registerLoginAuth.loginUser(context);
+
                         }
+
+                          setState(() {
+                            if(registerLoginAuth.email != '' && registerLoginAuth.password !=''){
+                              registerLoginAuth.errorMessage='';
+                              ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                            }
+                            if(registerLoginAuth.errorMessage=='Given String is empty or null' ||
+                                registerLoginAuth.errorMessage==''){
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  //  content: Text('${registerLoginAuth.errorMessage}'),
+                                  content: Text('Enter Email and Password'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                            else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('${registerLoginAuth.errorMessage}'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          }
+
+                          );
+
                       },
                       child: const Text('LOGIN'),
                     ),
