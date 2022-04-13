@@ -164,6 +164,26 @@ class _RegisterPageState extends State<RegisterPage> {
                         if(registerLoginAuth.regEmail != '' && registerLoginAuth.regPassword !=''){
                           registerLoginAuth.registerUser(context);
                         }
+                        setState(() {
+                          if(registerLoginAuth.errorMessage=='Given String is empty or null'){
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                //  content: Text('${registerLoginAuth.errorMessage}'),
+                                content: Text('Please provide information for all required fields'),
+                                backgroundColor: Colors.red,
+
+                              ),
+                            );
+                          }
+                          else{
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                //  content: Text('${registerLoginAuth.errorMessage}'),
+                                content: Text('${registerLoginAuth.errorMessage}'),
+                              ),
+                            );
+                          }
+                        });
                       },
                       child: const Text('REGISTER', style: TextStyle(color: Colors.white)),
                     ),

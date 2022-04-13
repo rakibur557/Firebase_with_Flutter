@@ -74,9 +74,15 @@ class RegisterLoginAuth {
           email: regEmail.text, password: regPassword.text).then((value){
             print('User is Registered');
       });
-
-    } catch (e){
-       SnackBar(content: Text('${e}'),);
+      errorMessage = '';
+    } on FirebaseAuthException catch (e){
+      errorMessage = e.message!;
+     // SnackBar(content: Text('EROOR'),);
+      print(e);
     }
   }
+  String errorMessage = '';
+// final ShowsnackBar = SnackBar(
+//   content: Text('${errorMessage}'),
+// );
 }

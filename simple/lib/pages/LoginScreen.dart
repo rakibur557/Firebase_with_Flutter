@@ -75,7 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-
 //PASSWORD FIELD START HERE
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
