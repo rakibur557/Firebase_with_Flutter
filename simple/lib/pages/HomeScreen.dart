@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:simple/services/googleServiceProvider.dart';
 import 'LoginScreen.dart';
 
@@ -42,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     radius: 65,
                     backgroundColor: Colors.white,
                     backgroundImage:
-                        _pickedImage == null ? null : FileImage(_pickedImage!),
+                        image == null ? null : FileImage(image!),
                   ),
                 ),
               ),
@@ -56,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     shape: CircleBorder(),
                     onPressed: () {
                       showDialog(
+                      //  useRootNavigator: Navigator.canPop(context),
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
@@ -71,7 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     InkWell(
                                       splashColor: Colors.blue,
-                                      onTap: () {},
+                                      onTap: () {
+                                        pickCamera();
+                                        setState(() {
+                                          Navigator.pop(context);
+                                        });
+                                      },
                                       child: Row(
                                         children: [
                                           Padding(
@@ -90,7 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                     InkWell(
                                       splashColor: Colors.blue,
-                                      onTap: () {},
+                                      onTap: () {
+                                        pickImg();
+                                        setState(() {
+                                          Navigator.pop(context);
+                                        });
+                                      },
                                       child: Row(
                                         children: [
                                           Padding(
@@ -112,7 +125,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             );
                           });
+                      // setState(() {
+                      //   Navigator.pop(context);
+                      // });
                     },
+                    
                   )),
             ],
           ),
@@ -141,5 +158,34 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       )),
     );
+  }
+  final ImagePicker _picker = ImagePicker();
+  File? image;
+  Future pickImg()async{
+    try{
+      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+      if(image == null) return;
+      final imageTemporary = File(image.path);
+      setState(() {
+        this.image = imageTemporary;
+      });
+    } on PlatformException catch(e){
+      print('Failed to pick image: ${e}');
+    }
+  }
+
+  // final ImagePicker _picker = ImagePicker();
+  //File? image;
+  Future pickCamera()async{
+    try{
+      final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+      if(image == null) return;
+      final imageTemporary = File(image.path);
+      setState(() {
+        this.image = imageTemporary;
+      });
+    } on PlatformException catch(e){
+      print('Failed to pick image: ${e}');
+    }
   }
 }
