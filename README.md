@@ -1,6 +1,12 @@
 # Firebase_with_Flutter
 A fully dynamic flutter aplication with Firebase to control backend server.
+
+App Details:
+Author: Rakibur Rahman
+App Lunched: 14 April, 2022.
 App Name: Simple
- Name: Rakibur Rahman
-Email: rahmanrakib780@gmail.com
-Phone: 01736121557
+Acronym: CMS
+Used Languages: Dart
+Support: Flutter FrameWork
+Catagory: Dynamic Android Application
+Play Store Url to download: [URL]
