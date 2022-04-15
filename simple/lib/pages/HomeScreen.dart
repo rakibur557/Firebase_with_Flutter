@@ -9,18 +9,14 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String path = "HomeScreen";
-
   HomeScreen({Key? key, this.email, this.name, this.photoUrl})
       : super(key: key);
 
   final email, name, photoUrl;
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return ZoomDrawer(
@@ -29,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       borderRadius: 30,
       showShadow: true,
       angle: 0.0,
-      menuBackgroundColor: Colors.deepPurple,
+      menuBackgroundColor: Color(0xff2c3e50),
       androidCloseOnBackTap: true,
       mainScreenTapClose: true,
 
@@ -39,13 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
-
   @override
   State<Home> createState() => _HomeState();
 }
-
 class _HomeState extends State<Home> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +47,9 @@ class _HomeState extends State<Home> {
         title: Text('Flutter Elite App'),
         centerTitle: true,
         leading: DrawerWidget(),
+        actions: [
+          Icon(Icons.share),
+        ],
       ),
     );
   }
@@ -61,16 +57,14 @@ class _HomeState extends State<Home> {
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
-
   @override
   State<DrawerScreen> createState() => _DrawerScreenState();
 }
-
 class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Color(0xff2c3e50),
       body: Center(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
@@ -87,8 +81,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     radius: 60,
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
-                      radius: 53,
-                      backgroundColor: Colors.blue,
+                      radius: 55,
+                      backgroundColor: Color(0xff34495e),
                       backgroundImage: image == null ? null : FileImage(image!),
                     ),
                   ),
@@ -99,7 +93,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     child: RawMaterialButton(
                       elevation: 10,
                       fillColor: Colors.white,
-                      child: Icon(Icons.add_a_photo, color: Colors.deepPurple),
+                      child: Icon(Icons.add_a_photo, color: Colors.black),
                       shape: CircleBorder(),
                       onPressed: () {
                         showDialog(
@@ -182,7 +176,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Color(0xff1abc9c),
               ),
             ),
             Text(
@@ -200,24 +194,23 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 onTap: () {},
                 splashColor: Colors.blueAccent,
                 child: drawerList(
-                    Icons.settings_system_daydream_sharp, 'Dashboard')),
+                    Icons.settings_system_daydream_sharp, 'Dashboard', '0xffe9c46a')),
             InkWell(
                 onTap: () {},
                 splashColor: Colors.blueAccent,
-                child: drawerList(Icons.people, 'People')),
-            //
+                child: drawerList(Icons.people, 'People', '0xff3498db')),
             InkWell(onTap: () {},
-                splashColor: Colors.blueAccent,child: drawerList(Icons.favorite, 'Favourite')),
+                splashColor: Colors.blueAccent,child: drawerList(Icons.favorite, 'Favourite', '0xffe74c3c')),
             InkWell(onTap: () {},
-                splashColor: Colors.blueAccent,child: drawerList(Icons.settings, 'Settings')),
+                splashColor: Colors.blueAccent,child: drawerList(Icons.settings, 'Settings', '0xff00c49a')),
             InkWell(onTap: () {},
-                splashColor: Colors.blueAccent,child: drawerList(Icons.code, 'Developer')),
+                splashColor: Colors.blueAccent,child: drawerList(Icons.code, 'Developer', '0xffffffff')),
             InkWell(onTap: () {},
-                splashColor: Colors.blueAccent,child: drawerList(Icons.star, 'Rating Us')),
+                splashColor: Colors.blueAccent,child: drawerList(Icons.star, 'Rating Us', '0xff4cc9f0')),
             InkWell(onTap: () {},
-                splashColor: Colors.blueAccent,child: drawerList(Icons.help, 'Help')),
+                splashColor: Colors.blueAccent,child: drawerList(Icons.help, 'Help', '0xffc77dff')),
             InkWell(onTap: () {},
-                splashColor: Colors.blueAccent,child: drawerList(Icons.info, 'About')),
+                splashColor: Colors.blueAccent,child: drawerList(Icons.info, 'About', '0xffffe066')),
             InkWell(onTap: () async{
               googleService.logout();
               setState(() {
@@ -229,20 +222,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 );
               });
             },
-        splashColor: Colors.blueAccent,child: drawerList(Icons.logout, 'Logout')),
+        splashColor: Colors.blueAccent,child: drawerList(Icons.logout, 'Logout', '0xffED4C67')),
           ],
         ),
       ),
     );
   }
   googleServiceProvider googleService = googleServiceProvider();
-  Widget drawerList(IconData icon, String text) {
+  Widget drawerList(IconData icon, String text, String colorCode) {
     return Container(
       height: 45 ,
       margin: EdgeInsets.only(left: 20),
       child: Row(
         children: [
-          Icon(icon, color: Colors.white),
+          Icon(icon, color: Color(int.parse(colorCode))),
           SizedBox(
             width: 10,
           ),
@@ -257,11 +250,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
       ),
     );
   }
-
 //image picker
   final ImagePicker _picker = ImagePicker();
   File? image;
-
   Future pickImg() async {
     try {
       final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -274,7 +265,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
       print('Failed to pick image: ${e}');
     }
   }
-
   Future pickCamera() async {
     try {
       final XFile? image = await _picker.pickImage(source: ImageSource.camera);
@@ -291,7 +281,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return IconButton(
