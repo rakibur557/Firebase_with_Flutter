@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       borderRadius: 30,
       showShadow: true,
       angle: 0.0,
-      menuBackgroundColor: Colors.purple,
+      menuBackgroundColor: Colors.deepPurple,
     );
   }
 }
@@ -68,25 +68,26 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple,
+      backgroundColor: Colors.deepPurple,
       body: Center(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
-         // crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 25,
+            ),
             Stack(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                   child: CircleAvatar(
                     radius: 60,
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
                       radius: 53,
                       backgroundColor: Colors.blue,
-                      backgroundImage:
-                      image == null ? null : FileImage(image!),
+                      backgroundImage: image == null ? null : FileImage(image!),
                     ),
                   ),
                 ),
@@ -96,11 +97,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     child: RawMaterialButton(
                       elevation: 10,
                       fillColor: Colors.white,
-                      child: Icon(Icons.add_a_photo, color: Colors.purpleAccent),
+                      child:
+                          Icon(Icons.add_a_photo, color: Colors.deepPurple),
                       shape: CircleBorder(),
                       onPressed: () {
                         showDialog(
-                          //  useRootNavigator: Navigator.canPop(context),
+                            //  useRootNavigator: Navigator.canPop(context),
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
@@ -125,7 +127,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                         child: Row(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Icon(Icons.camera_alt),
                                             ),
                                             Text(
@@ -137,7 +140,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                           ],
                                         ),
                                       ),
-
                                       InkWell(
                                         splashColor: Colors.blue,
                                         onTap: () {
@@ -149,7 +151,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                         child: Row(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Icon(Icons.image),
                                             ),
                                             Text(
@@ -161,7 +164,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                           ],
                                         ),
                                       ),
-
                                     ],
                                   ),
                                 ),
@@ -174,23 +176,38 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     )),
               ],
             ),
-            Text('RAKIBUR RAHMAN', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.white),),
-            Text('rahmanrakib780@gmail.com', style: TextStyle(fontSize: 15,color: Colors.white),),
+            Text(
+              'RAKIBUR RAHMAN'.toUpperCase(),
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              'rahmanrakib780@gmail.com'.toLowerCase(),
+              style: TextStyle(fontSize: 15, color: Colors.white),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Divider(color: Colors.white, thickness: 0.5,indent: 1),
+            ),
             drawerList(Icons.home, 'Home'),
-
           ],
         ),
       ),
     );
-
   }
-  Widget drawerList(IconData icon, String text){
+
+  Widget drawerList(IconData icon, String text) {
     return Container(
       margin: EdgeInsets.only(left: 20),
       child: Row(
         children: [
           Icon(icon),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Text('text'),
         ],
       ),
@@ -200,28 +217,29 @@ class _DrawerScreenState extends State<DrawerScreen> {
 //image picker
   final ImagePicker _picker = ImagePicker();
   File? image;
-  Future pickImg()async{
-    try{
+
+  Future pickImg() async {
+    try {
       final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-      if(image == null) return;
+      if (image == null) return;
       final imageTemporary = File(image.path);
       setState(() {
         this.image = imageTemporary;
       });
-    } on PlatformException catch(e){
+    } on PlatformException catch (e) {
       print('Failed to pick image: ${e}');
     }
   }
 
-  Future pickCamera()async{
-    try{
+  Future pickCamera() async {
+    try {
       final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-      if(image == null) return;
+      if (image == null) return;
       final imageTemporary = File(image.path);
       setState(() {
         this.image = imageTemporary;
       });
-    } on PlatformException catch(e){
+    } on PlatformException catch (e) {
       print('Failed to pick image: ${e}');
     }
   }
