@@ -20,8 +20,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  googleServiceProvider googleService = googleServiceProvider();
-  File? _pickedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
       showShadow: true,
       angle: 0.0,
       menuBackgroundColor: Colors.deepPurple,
+      androidCloseOnBackTap: true,
+      mainScreenTapClose: true,
+
     );
   }
 }
@@ -44,6 +45,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -216,17 +218,27 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 splashColor: Colors.blueAccent,child: drawerList(Icons.help, 'Help')),
             InkWell(onTap: () {},
                 splashColor: Colors.blueAccent,child: drawerList(Icons.info, 'About')),
-            InkWell(onTap: () {},
+            InkWell(onTap: () async{
+              googleService.logout();
+              setState(() {
+                Navigator.pushReplacement(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => LoginScreen(),
+                  ),
+                );
+              });
+            },
         splashColor: Colors.blueAccent,child: drawerList(Icons.logout, 'Logout')),
           ],
         ),
       ),
     );
   }
-
+  googleServiceProvider googleService = googleServiceProvider();
   Widget drawerList(IconData icon, String text) {
     return Container(
-      height: 45,
+      height: 45 ,
       margin: EdgeInsets.only(left: 20),
       child: Row(
         children: [
@@ -485,3 +497,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 */
+

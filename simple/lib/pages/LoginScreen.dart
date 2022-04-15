@@ -211,13 +211,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                           await googleService.signInWithGoogle();
                           setState(() {
-                            Navigator.pushReplacement(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) => HomeScreen(
-                                        email: googleService.email,
-                                        name: googleService.name,
-                                        photoUrl: googleService.photoUrl)));
+                            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(
+                                builder: (context) => HomeScreen(
+                                    email: googleService.email,
+                                    name: googleService.name,
+                                    photoUrl: googleService.photoUrl)), (route) => false);
+                            // Navigator.pushReplacement(
+                            //     context,
+                            //     CupertinoPageRoute(
+                            //         builder: (context) => HomeScreen(
+                            //             email: googleService.email,
+                            //             name: googleService.name,
+                            //             photoUrl: googleService.photoUrl)));
                             //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
                           });
                         },
