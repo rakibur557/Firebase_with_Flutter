@@ -97,8 +97,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     child: RawMaterialButton(
                       elevation: 10,
                       fillColor: Colors.white,
-                      child:
-                          Icon(Icons.add_a_photo, color: Colors.deepPurple),
+                      child: Icon(Icons.add_a_photo, color: Colors.deepPurple),
                       shape: CircleBorder(),
                       onPressed: () {
                         showDialog(
@@ -190,26 +189,35 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Divider(color: Colors.white, thickness: 0.5,indent: 1),
+              child: Divider(color: Colors.white, thickness: 0.5, indent: 1),
             ),
-            SizedBox(height: 5,),
-            drawerList(Icons.settings_system_daydream_sharp, 'Dashboard'),
-            SizedBox(height: 20,),
-            drawerList(Icons.people, 'People'),
-            SizedBox(height: 20,),
-            drawerList(Icons.favorite, 'Favourite'),
-            SizedBox(height: 20,),
-            drawerList(Icons.settings, 'Settings'),
-            SizedBox(height: 20,),
-            drawerList(Icons.code, 'Developer'),
-            SizedBox(height: 20,),
-            drawerList(Icons.star, 'Rating Us'),
-            SizedBox(height: 20,),
-            drawerList(Icons.help, 'Help'),
-            SizedBox(height: 20,),
-            drawerList(Icons.info, 'About'),
-            SizedBox(height: 20,),
-            drawerList(Icons.logout, 'Logout'),
+            SizedBox(
+              height: 5,
+            ),
+            InkWell(
+                onTap: () {},
+                splashColor: Colors.blueAccent,
+                child: drawerList(
+                    Icons.settings_system_daydream_sharp, 'Dashboard')),
+            InkWell(
+                onTap: () {},
+                splashColor: Colors.blueAccent,
+                child: drawerList(Icons.people, 'People')),
+            //
+            InkWell(onTap: () {},
+                splashColor: Colors.blueAccent,child: drawerList(Icons.favorite, 'Favourite')),
+            InkWell(onTap: () {},
+                splashColor: Colors.blueAccent,child: drawerList(Icons.settings, 'Settings')),
+            InkWell(onTap: () {},
+                splashColor: Colors.blueAccent,child: drawerList(Icons.code, 'Developer')),
+            InkWell(onTap: () {},
+                splashColor: Colors.blueAccent,child: drawerList(Icons.star, 'Rating Us')),
+            InkWell(onTap: () {},
+                splashColor: Colors.blueAccent,child: drawerList(Icons.help, 'Help')),
+            InkWell(onTap: () {},
+                splashColor: Colors.blueAccent,child: drawerList(Icons.info, 'About')),
+            InkWell(onTap: () {},
+        splashColor: Colors.blueAccent,child: drawerList(Icons.logout, 'Logout')),
           ],
         ),
       ),
@@ -218,17 +226,21 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
   Widget drawerList(IconData icon, String text) {
     return Container(
+      height: 45,
       margin: EdgeInsets.only(left: 20),
       child: Row(
         children: [
-          Icon(icon,color: Colors.white),
+          Icon(icon, color: Colors.white),
           SizedBox(
             width: 10,
           ),
-          Text(text, style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),),
+          Text(
+            text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
         ],
       ),
     );
