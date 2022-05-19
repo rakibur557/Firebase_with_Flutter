@@ -34,19 +34,27 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
     return Container(
       width: MediaQuery.of(context).size.width - 40,
       decoration: BoxDecoration(
-        //color: Colors.green,
+        //color: Colors.deepPurple,
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(
         decoration: InputDecoration(
-          border: InputBorder.none,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
           hintText: "Enter your Phone Number",
           hintStyle: TextStyle(color: Colors.black38, fontSize: 17),
+          contentPadding: const EdgeInsets.symmetric(vertical: 19, horizontal: 8),
           prefixIcon: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
             child: Text("(+880)", style: TextStyle(color: Colors.black, fontSize: 17,),
           ),
         ),
+          suffixIcon: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
+            child: Text("Send", style: TextStyle(color: Colors.black, fontSize: 17,),
+            ),
+          ),
       ),
     ));
   }
