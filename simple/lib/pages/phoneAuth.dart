@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class PhoneAuthPage extends StatefulWidget {
   const PhoneAuthPage({Key? key}) : super(key: key);
-
+  static const String path = "PhoneAuthPage";
   @override
   State<PhoneAuthPage> createState() => _PhoneAuthPageState();
 }
@@ -12,7 +12,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
         title: Text('Sign Up'),
         centerTitle: true,
       ),
@@ -34,7 +34,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
     return Container(
       width: MediaQuery.of(context).size.width - 40,
       decoration: BoxDecoration(
-        color: Colors.green,
+        //color: Colors.green,
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(

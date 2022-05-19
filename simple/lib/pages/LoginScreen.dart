@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:simple/pages/phoneAuth.dart';
 import 'package:simple/services/googleServiceProvider.dart';
 import 'HomeScreen.dart';
 
@@ -199,7 +200,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
 // PHONE VARIFICATION SECTION
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>PhoneAuthPage()),);
+                        },
                         icon: Image.asset(
                           'assets/images/telephone.png',
                         )),
