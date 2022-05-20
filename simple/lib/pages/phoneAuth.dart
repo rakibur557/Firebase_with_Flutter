@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/style.dart';
 class PhoneAuthPage extends StatefulWidget {
   const PhoneAuthPage({Key? key}) : super(key: key);
   static const String path = "PhoneAuthPage";
@@ -22,8 +25,24 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 40,),
+              SizedBox(height: 150,),
               textfield(),
+              SizedBox(height: 50,),
+// OTP BOX
+              OTPTextField(
+                length: 5,
+                width: MediaQuery.of(context).size.width,
+                fieldWidth: 50,
+                style: TextStyle(
+                    fontSize: 17
+                ),
+                textFieldAlignment: MainAxisAlignment.spaceAround,
+                fieldStyle: FieldStyle.box,
+                onCompleted: (pin) {
+                  print("Completed: " + pin);
+                },
+              )
+
             ],
           ),
         ),
@@ -52,10 +71,27 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         ),
           suffixIcon: Padding(
             padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
-            child: Text("Send", style: TextStyle(color: Colors.black, fontSize: 17,),
+            child: Text("Send", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
       ),
     ));
   }
 }
+/*
+Widget otpField(){
+  return OTPTextField(
+    length: 5,
+    width: MediaQuery.of(context).size.width,
+    fieldWidth: 80,
+    style: TextStyle(
+        fontSize: 17
+    ),
+    textFieldAlignment: MainAxisAlignment.spaceAround,
+    fieldStyle: FieldStyle.underline,
+    onCompleted: (pin) {
+      print("Completed: " + pin);
+    },
+  );
+}
+*/
