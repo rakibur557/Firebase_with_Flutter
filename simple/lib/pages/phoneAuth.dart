@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -10,6 +12,7 @@ class PhoneAuthPage extends StatefulWidget {
 }
 
 class _PhoneAuthPageState extends State<PhoneAuthPage> {
+  int start = 30;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +51,22 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         ),
       ),
     );
+  }
+
+  void startTimer(){
+    const onsec = Duration(seconds: 1);
+    Timer timer = Timer.periodic(onsec, (timer) {
+      if(start==0){
+        setState(() {
+          timer.cancel();
+        });
+      }
+      else{
+        setState(() {
+          start--;
+        });
+      }
+    });
   }
   Widget textfield(){
     return Container(
