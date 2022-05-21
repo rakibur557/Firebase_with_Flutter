@@ -63,7 +63,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       }
       else{
         setState(() {
-          start--;
+          start--; //ok
         });
       }
     });
