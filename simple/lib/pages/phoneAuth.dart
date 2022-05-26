@@ -13,6 +13,8 @@ class PhoneAuthPage extends StatefulWidget {
 
 class _PhoneAuthPageState extends State<PhoneAuthPage> {
   int start = 30;
+  bool wait = false;
+  String buttonName = "Send";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +46,29 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                 onCompleted: (pin) {
                   print("Completed: " + pin);
                 },
-              )
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              RichText(text: TextSpan(
+                children: [
+                  TextSpan(
+                  text: "Send OTP again in ",
+                  style: TextStyle(color: Colors.blue,
+                  ),),
+                  TextSpan(
+                    text: "$start",
+                    style: TextStyle(color: Colors.red,
+                    ),),
+                  TextSpan(
+                    text: " sec.",
+                    style: TextStyle(color: Colors.blue,
+                    ),),
 
+                ],
+              ),),
+
+              //Text("Send OTP again in "+"$start sec"),
             ],
           ),
         ),
@@ -59,6 +82,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       if(start==0){
         setState(() {
           timer.cancel();
+          wait = false;
         });
       }
       else{
@@ -85,12 +109,22 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           contentPadding: const EdgeInsets.symmetric(vertical: 19, horizontal: 8),
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
-            child: Text("(+880)", style: TextStyle(color: Colors.black, fontSize: 17,),
+            child: Text("(+88)", style: TextStyle(color: Colors.black, fontSize: 17,),
           ),
         ),
-          suffixIcon: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
-            child: Text("Send", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+          suffixIcon: GestureDetector(
+            onTap: wait? null : (){
+              startTimer();
+              setState(() {
+                start = 30;
+                wait = true;
+                buttonName = "Resend";
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
+              child: Text(buttonName, style: TextStyle(color: wait? Colors.grey : Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
       ),
