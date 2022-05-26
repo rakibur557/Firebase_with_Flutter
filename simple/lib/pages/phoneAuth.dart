@@ -64,11 +64,15 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                     text: " sec.",
                     style: TextStyle(color: Colors.blue,
                     ),),
-
                 ],
               ),),
-
-              //Text("Send OTP again in "+"$start sec"),
+              SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(onPressed: (){}, child: Text('Login'),),
+              ),
             ],
           ),
         ),
