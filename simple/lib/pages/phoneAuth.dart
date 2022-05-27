@@ -15,6 +15,8 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
   int start = 30;
   bool wait = false;
   String buttonName = "Send";
+  TextEditingController phoneController = TextEditingController();
+  //AuthClass authClass = AuthClass;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,10 +71,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
               SizedBox(
                 height: 40,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(onPressed: (){}, child: Text('Login'),),
-              ),
+              ElevatedButton(onPressed: (){}, child: Text('Login'),style: ElevatedButton.styleFrom(padding: EdgeInsets.only(right: 100, left: 100)),),
             ],
           ),
         ),
@@ -113,7 +112,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           contentPadding: const EdgeInsets.symmetric(vertical: 19, horizontal: 8),
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
-            child: Text("(+88)", style: TextStyle(color: Colors.black, fontSize: 17,),
+            child: Text( "(+88)", style: TextStyle(color: Colors.black, fontSize: 17,),
           ),
         ),
           suffixIcon: GestureDetector(
@@ -135,20 +134,3 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
     ));
   }
 }
-/*
-Widget otpField(){
-  return OTPTextField(
-    length: 5,
-    width: MediaQuery.of(context).size.width,
-    fieldWidth: 80,
-    style: TextStyle(
-        fontSize: 17
-    ),
-    textFieldAlignment: MainAxisAlignment.spaceAround,
-    fieldStyle: FieldStyle.underline,
-    onCompleted: (pin) {
-      print("Completed: " + pin);
-    },
-  );
-}
-*/
