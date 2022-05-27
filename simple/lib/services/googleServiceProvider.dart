@@ -116,7 +116,7 @@ class RegisterLoginAuth {
 class Verification {
   final auth = FirebaseAuth.instance;
 
-  Future<void> verifyPhoneNumber(String phoneNumber, BuildContext context) async {
+  Future<void> verifyPhoneNumber(String phoneNumber, BuildContext context, Function sentData) async {
     PhoneVerificationCompleted verificationCompleted = (PhoneAuthCredential phoneAuthCredential) async{
       showSnackBar(context, "Verification Completed");
     };
@@ -125,6 +125,7 @@ class Verification {
     };
     PhoneCodeSent codeSent = (String verificationID, [int? forceResendingtoken]){
       showSnackBar(context, "Verification code sent to the phone Number.");
+      sentData(verificationID);
     };
     PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout = (String verificationID){
       showSnackBar(context, "Time Out");

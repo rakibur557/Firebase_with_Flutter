@@ -18,6 +18,8 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
   String buttonName = "Send";
   TextEditingController phoneController = TextEditingController();
   Verification verification = Verification();
+  String verificationId ="";
+  String smsCode = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +126,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                 wait = true;
                 buttonName = "Resend";
               });
-              await verification.verifyPhoneNumber("+88 ${phoneController.text})", context);
+              await verification.verifyPhoneNumber("+88 ${phoneController.text})", context, setdata);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
@@ -135,5 +137,10 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       ),
     ));
   }
-  
+  void setdata(){
+    setState(() {
+      verificationId = verificationId;
+    });
+    startTimer();
+  }
 }
