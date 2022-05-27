@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:simple/services/googleServiceProvider.dart';
 class PhoneAuthPage extends StatefulWidget {
   const PhoneAuthPage({Key? key}) : super(key: key);
   static const String path = "PhoneAuthPage";
@@ -16,7 +17,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
   bool wait = false;
   String buttonName = "Send";
   TextEditingController phoneController = TextEditingController();
-  //AuthClass authClass = AuthClass;
+  Verification verification = Verification();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,13 +117,14 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           ),
         ),
           suffixIcon: GestureDetector(
-            onTap: wait? null : (){
+            onTap: wait? null : () async{
               startTimer();
               setState(() {
                 start = 30;
                 wait = true;
                 buttonName = "Resend";
               });
+              await verification.verifyPhoneNumber("+88 ${phoneController.text})", context);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
@@ -133,4 +135,5 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       ),
     ));
   }
+  
 }

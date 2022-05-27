@@ -113,7 +113,7 @@ class RegisterLoginAuth {
   }
 }
 
-class Varification {
+class Verification {
   final auth = FirebaseAuth.instance;
 
   Future<void> verifyPhoneNumber(String phoneNumber, BuildContext context) async {
