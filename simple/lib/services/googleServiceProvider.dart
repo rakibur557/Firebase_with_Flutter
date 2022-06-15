@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -138,7 +137,9 @@ class Verification {
           codeSent: codeSent,
           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
     } catch (e) {
+      print(e);
       showSnackBar(context, e.toString());
+
     }
   }
   void showSnackBar(BuildContext context, String text){

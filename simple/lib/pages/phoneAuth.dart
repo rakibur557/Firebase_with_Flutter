@@ -115,7 +115,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           contentPadding: const EdgeInsets.symmetric(vertical: 19, horizontal: 8),
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
-            child: Text( "(+88)", style: TextStyle(color: Colors.black, fontSize: 17,),
+            child: Text( "(+880)", style: TextStyle(color: Colors.black, fontSize: 17,),
           ),
         ),
           suffixIcon: GestureDetector(
@@ -126,7 +126,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                 wait = true;
                 buttonName = "Resend";
               });
-              await verification.verifyPhoneNumber("+88 ${phoneController.text})", context, setdata);
+              await verification.verifyPhoneNumber("${phoneController.text})", context, setdata);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 15),
